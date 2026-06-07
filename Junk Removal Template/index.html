@@ -53,9 +53,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .btn-b:hover{border-color:var(--white);}
 
 /* ─── TRUST BAR ─── */
-.trust-bar{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.9rem 6%;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:1.8rem;}
-.trust-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--white);}
+.trust-bar{background:var(--panel);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.85rem 0;overflow:hidden;}
+.ticker-track{display:flex;width:max-content;animation:ticker 22s linear infinite;}
+.ticker-track:hover{animation-play-state:paused;}
+.ticker-set{display:flex;align-items:center;}
+.trust-item{display:flex;align-items:center;gap:.5rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--white);padding:0 2rem;white-space:nowrap;}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);display:inline-block;flex-shrink:0;}
+@keyframes ticker{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
 
 /* ─── SHARED LAYOUT ─── */
 .sec{padding:5.5rem 6%;}
@@ -98,12 +102,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 
 /* ─── BEFORE/AFTER ─── */
 .ba-section{background:var(--panel);}
-.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-.ba-item{position:relative;border-radius:8px;overflow:hidden;}
-.ba-item img{width:100%;height:400px;object-fit:cover;}
-.ba-label{position:absolute;top:1.2rem;left:1.2rem;padding:.3rem .85rem;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
-.ba-label.before{background:#EF4444;color:#fff;}
-.ba-label.after{background:var(--green);color:#fff;}
+.ba-slider{position:relative;width:100%;height:480px;border-radius:8px;overflow:hidden;cursor:col-resize;user-select:none;-webkit-user-select:none;}
+.ba-img-full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ba-before-img{clip-path:inset(0 50% 0 0);}
+.ba-handle{position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;display:flex;flex-direction:column;align-items:center;z-index:10;pointer-events:none;}
+.ba-handle-line{flex:1;width:2px;background:rgba(255,255,255,0.85);}
+.ba-handle-circle{width:46px;height:46px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 16px rgba(0,0,0,0.5);flex-shrink:0;}
+.ba-handle-circle svg{width:22px;height:22px;}
+.ba-tag{position:absolute;top:1.2rem;padding:.28rem .8rem;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;z-index:5;pointer-events:none;}
+.ba-tag.before{left:1.2rem;background:#EF4444;color:#fff;}
+.ba-tag.after{right:1.2rem;background:var(--green);color:#fff;}
 
 /* ─── ACTION SHOTS ─── */
 .action-grid{display:grid;grid-template-columns:3fr 2fr;gap:1.25rem;}
@@ -201,7 +209,8 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
 /* ─── RESPONSIVE ─── */
 @media(max-width:900px){
   .nav-links{display:none;}
-  .pain-grid,.team-grid,.ba-grid{grid-template-columns:1fr;gap:2rem;}
+  .pain-grid,.team-grid{grid-template-columns:1fr;gap:2rem;}
+  .ba-slider{height:320px;}
   .svc-grid,.steps-grid,.price-grid,.reviews-grid{grid-template-columns:1fr;}
   .action-grid{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;gap:2rem;}
@@ -242,11 +251,26 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
-  <div class="trust-item"><span class="dot"></span>Same-Day Available</div>
-  <div class="trust-item"><span class="dot"></span>Free Upfront Quote</div>
-  <div class="trust-item"><span class="dot"></span>Licensed &amp; Insured</div>
-  <div class="trust-item"><span class="dot"></span>No Hidden Fees</div>
-  <div class="trust-item"><span class="dot"></span>Hurricane Debris Specialists</div>
+  <div class="ticker-track">
+    <div class="ticker-set">
+      <div class="trust-item"><span class="dot"></span>Same-Day Available</div>
+      <div class="trust-item"><span class="dot"></span>Free Upfront Quote</div>
+      <div class="trust-item"><span class="dot"></span>Licensed &amp; Insured</div>
+      <div class="trust-item"><span class="dot"></span>No Hidden Fees</div>
+      <div class="trust-item"><span class="dot"></span>Hurricane Debris Specialists</div>
+      <div class="trust-item"><span class="dot"></span>Background-Checked Crew</div>
+      <div class="trust-item"><span class="dot"></span>We Donate &amp; Recycle First</div>
+    </div>
+    <div class="ticker-set" aria-hidden="true">
+      <div class="trust-item"><span class="dot"></span>Same-Day Available</div>
+      <div class="trust-item"><span class="dot"></span>Free Upfront Quote</div>
+      <div class="trust-item"><span class="dot"></span>Licensed &amp; Insured</div>
+      <div class="trust-item"><span class="dot"></span>No Hidden Fees</div>
+      <div class="trust-item"><span class="dot"></span>Hurricane Debris Specialists</div>
+      <div class="trust-item"><span class="dot"></span>Background-Checked Crew</div>
+      <div class="trust-item"><span class="dot"></span>We Donate &amp; Recycle First</div>
+    </div>
+  </div>
 </div>
 
 <!-- PAIN SECTION -->
@@ -351,16 +375,19 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
   <div class="inner">
     <div class="sec-tag">Proof</div>
     <h2 class="sec-title">Before &amp; After</h2>
-    <p class="sec-sub">This is what we do — every single day.</p>
-    <div class="ba-grid">
-      <div class="ba-item">
-        <span class="ba-label before">Before</span>
-        <img src="Before.png" alt="Cluttered garage before junk removal">
+    <p class="sec-sub">Drag the handle to see the transformation.</p>
+    <div class="ba-slider" id="baSlider">
+      <img class="ba-img-full" src="After.png" alt="After junk removal - clean garage">
+      <img class="ba-img-full ba-before-img" id="baBeforeImg" src="Before.png" alt="Before junk removal - cluttered garage">
+      <div class="ba-handle" id="baHandle">
+        <div class="ba-handle-line"></div>
+        <div class="ba-handle-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0B1623" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5l-5 7 5 7M16 5l5 7-5 7"/></svg>
+        </div>
+        <div class="ba-handle-line"></div>
       </div>
-      <div class="ba-item">
-        <span class="ba-label after">After</span>
-        <img src="After.png" alt="Clean empty garage after junk removal">
-      </div>
+      <span class="ba-tag before">Before</span>
+      <span class="ba-tag after">After</span>
     </div>
   </div>
 </section>
@@ -589,6 +616,32 @@ footer{background:var(--dark);border-top:1px solid var(--border);padding:3.5rem 
     <p>Website by <a href="https://brechtland.com">Brechtland</a></p>
   </div>
 </footer>
+<script>
+// ── Before/After Slider ──
+(function(){
+  const slider = document.getElementById('baSlider');
+  const beforeImg = document.getElementById('baBeforeImg');
+  const handle = document.getElementById('baHandle');
+  if(!slider) return;
+  let dragging = false;
+
+  function update(clientX){
+    const rect = slider.getBoundingClientRect();
+    const pos = Math.max(0, Math.min(clientX - rect.left, rect.width));
+    const pct = (pos / rect.width) * 100;
+    beforeImg.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+    handle.style.left = pct + '%';
+  }
+
+  slider.addEventListener('mousedown', function(e){ dragging = true; update(e.clientX); e.preventDefault(); });
+  window.addEventListener('mousemove', function(e){ if(dragging) update(e.clientX); });
+  window.addEventListener('mouseup', function(){ dragging = false; });
+
+  slider.addEventListener('touchstart', function(e){ dragging = true; update(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('touchmove', function(e){ if(dragging) update(e.touches[0].clientX); }, {passive:true});
+  window.addEventListener('touchend', function(){ dragging = false; });
+})();
+</script>
 
 </body>
 </html>
